@@ -1,6 +1,13 @@
 import { html, css, LitElement } from 'lit';
 import axios from 'axios';
 
+let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Access-Control-Allow-Origin': '*'
+    }
+};
+
 class ThoughtBox extends LitElement {
 
     static styles = css`
@@ -45,7 +52,7 @@ class ThoughtBox extends LitElement {
         try {
             const response = await axios.post('http://localhost:8000/thoughts', {
                 thought: thought
-            });
+            }, axiosConfig);
             console.log(response.data);
             alert("Thought stored successfully");
         } catch (error) {

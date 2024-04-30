@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.crud import retrieve_thoughts, save_thought
 from app.database import SessionLocal, engine
@@ -14,6 +15,20 @@ load_dotenv(dotenv_path=os.path.join(os.getcwd(),"app/.env"))
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# CORS
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def get_db():
     db = SessionLocal()

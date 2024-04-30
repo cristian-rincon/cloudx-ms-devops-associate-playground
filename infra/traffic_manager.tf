@@ -1,10 +1,10 @@
-resource "azurerm_traffic_manager_profile" "app_tm" {
-  name                   = "app-tm"
+resource "azurerm_traffic_manager_profile" "cloudx_app_tm" {
+  name                   = "${var.prefix}-app-tm-${var.identifier}"
   resource_group_name    = azurerm_resource_group.frontend_rg.name
   profile_status         = "Enabled"
   traffic_routing_method = "Priority"
   dns_config {
-    relative_name = "app-tm"
+    relative_name = "${var.prefix}-app-tm-${var.identifier}"
     ttl           = 60
   }
   monitor_config {
@@ -13,7 +13,10 @@ resource "azurerm_traffic_manager_profile" "app_tm" {
     path     = "/"
   }
   tags = {
-    environment = "production"
+    environment = "${var.environment}"
   }
 
+  depends_on = [
+    azurerm_resource_group.frontend_rg
+  ]
 }

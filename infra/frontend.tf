@@ -13,7 +13,7 @@ resource "azurerm_service_plan" "frontend_plan" {
 
   sku_name = "F1"
 
-  depends_on = [ azurerm_resource_group.frontend_rg ]
+  depends_on = [azurerm_resource_group.frontend_rg]
 }
 
 resource "azurerm_linux_web_app" "frontend_app" {
@@ -33,6 +33,6 @@ resource "azurerm_linux_web_app" "frontend_app" {
     ]
   }
 
-  depends_on = [ azurerm_service_plan.frontend_plan ]
+  depends_on = [azurerm_service_plan.frontend_plan]
 
 }

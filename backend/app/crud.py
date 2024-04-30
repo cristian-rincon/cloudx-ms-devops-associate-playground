@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app import schemas
-from app import models
+from app import models, schemas
+
 
 def save_thought(session: Session, thought: schemas.ThoughtModel):
     """Store user thought"""

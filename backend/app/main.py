@@ -1,16 +1,16 @@
-
 import os
+
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
 
 from app.crud import retrieve_thoughts, save_thought
 from app.database import SessionLocal, engine
 from app.models import Base
 from app.schemas import ThoughtModel
 
-load_dotenv(dotenv_path=os.path.join(os.getcwd(),"app/.env")) 
+load_dotenv(dotenv_path=os.path.join(os.getcwd(), "app/.env"))
 
 Base.metadata.create_all(bind=engine)
 
@@ -29,6 +29,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 def get_db():
     db = SessionLocal()

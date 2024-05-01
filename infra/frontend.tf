@@ -24,6 +24,10 @@ resource "azurerm_linux_web_app" "frontend_app" {
 
   site_config {
     always_on = false
+    application_stack {
+      node_version = "20-lts"
+
+    }
   }
 
   identity {

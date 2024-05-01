@@ -25,7 +25,28 @@ resource "azurerm_linux_web_app" "backend_app" {
   service_plan_id     = azurerm_service_plan.backend_plan.id
 
   app_settings = {
-    "SCM_DO_BUILD_DURING_DEPLOYMENT" = "1"
+    "SCM_DO_BUILD_DURING_DEPLOYMENT"   = "1"
+    "AZURE_KEYVAULT_CLIENTID"          = "4431371e-7ad3-4661-a2d1-0885cb72c951"
+    "AZURE_KEYVAULT_RESOURCEENDPOINT"  = "https://cloudx-kv-0a04bd6e.vault.azure.net/"
+    "AZURE_KEYVAULT_SCOPE"             = "https://vault.azure.net/.default"
+    "AZURE_MANAGED_IDENTITY_CLIENT_ID" = "4431371e-7ad3-4661-a2d1-0885cb72c951"
+    "AZURE_MYSQL_HOST"                 = "cloudx-mysqlserver-820548440a04bd6e.mysql.database.azure.com"
+    "AZURE_MYSQL_NAME"                 = "cloudx-mysqldb-820548440a04bd6e"
+    "AZURE_MYSQL_PASSWORD"             = "@Microsoft.KeyVault(SecretUri=https://cloudx-kv-0a04bd6e.vault.azure.net/secrets/db-password)"
+    "AZURE_MYSQL_USER"                 = "mysqladminun"
+    "ENVIRONMENT"                      = "production"
+  }
+
+  sticky_settings {
+    app_setting_names = [
+      "AZURE_MYSQL_NAME",
+      "AZURE_MYSQL_HOST",
+      "AZURE_MYSQL_USER",
+      "AZURE_MYSQL_PASSWORD",
+      "AZURE_KEYVAULT_RESOURCEENDPOINT",
+      "AZURE_KEYVAULT_CLIENTID",
+      "AZURE_KEYVAULT_SCOPE",
+    ]
   }
 
   site_config {

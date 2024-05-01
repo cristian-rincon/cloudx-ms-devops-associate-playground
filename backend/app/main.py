@@ -14,7 +14,11 @@ load_dotenv(dotenv_path=os.path.join(os.getcwd(), "app/.env"))
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(
+    title="Thoughts API",
+    description="API to store and retrieve user thoughts",
+    version="1.0.0",
+)
 
 # CORS
 origins = [
@@ -52,9 +56,3 @@ async def store_thought(thought: ThoughtModel, db: Session = Depends(get_db)):
 async def get_thoughts(db: Session = Depends(get_db)):
     """Get all thoughts"""
     return retrieve_thoughts(db)
-
-
-# if __name__ == "__main__":
-#     import uvicorn
-
-#     uvicorn.run(app, host="localhost", port=8000)

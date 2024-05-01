@@ -50,7 +50,7 @@ class ThoughtBox extends LitElement {
         inputBox.value = '';
 
         try {
-            const response = await axios.post('http://localhost:8000/thoughts', {
+            const response = await axios.post('https://cloudx-backend-app-820548440a04bd6e.azurewebsites.net/thoughts', {
                 thought: thought
             }, axiosConfig);
             console.log(response.data);

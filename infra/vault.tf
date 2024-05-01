@@ -20,7 +20,9 @@ resource "azurerm_key_vault" "app_kv" {
       "Get",
       "List",
       "Set",
-      "Delete"
+      "Delete",
+      "Purge",
+      "Recover"
     ]
   }
 
@@ -45,14 +47,8 @@ resource "azurerm_key_vault_secret" "db_password" {
   key_vault_id = azurerm_key_vault.app_kv.id
 }
 
-resource "azurerm_key_vault_secret" "db_host" {
-  name         = "db-host"
-  value        = var.db_host
-  key_vault_id = azurerm_key_vault.app_kv.id
-}
-
-resource "azurerm_key_vault_secret" "db_name" {
-  name         = "db-name"
-  value        = var.db_name
+resource "azurerm_key_vault_secret" "db_connection_string" {
+  name         = "db-connection-string"
+  value        = var.db_connection_string
   key_vault_id = azurerm_key_vault.app_kv.id
 }

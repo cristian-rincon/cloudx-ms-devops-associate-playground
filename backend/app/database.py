@@ -11,13 +11,7 @@ if os.getenv("ENVIRONMENT") == "production":
         vault_url=os.getenv("AZURE_KEYVAULT_RESOURCEENDPOINT"),
         credential=DefaultAzureCredential(),
     )
-    db_username = kv_client.get_secret("db-username")
-    db_password = kv_client.get_secret("db-password")
-    db_host = kv_client.get_secret("db-host")
-    db_name = kv_client.get_secret("db-name")
-    DATABASE_URL = (
-        f"mysql+mysqlconnector://{db_username}:{db_password}@{db_host}/{db_name}"
-    )
+    DATABASE_URL = kv_client.get_secret("db-connection-string")
     engine = create_engine(DATABASE_URL)
 else:
     DATABASE_URL = "sqlite:///./test.db"

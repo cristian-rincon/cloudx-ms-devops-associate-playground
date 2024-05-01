@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
+from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -44,6 +45,10 @@ def get_db():
 
 
 # placeholder used for SQLite connection
+
+@app.get("/", include_in_schema=False)
+async def redirect_to_docs():
+    return RedirectResponse(url="/docs")
 
 
 @app.post("/thoughts", response_model=ThoughtModel)

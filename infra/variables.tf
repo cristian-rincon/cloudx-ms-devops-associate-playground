@@ -21,3 +21,23 @@ variable "short_identifier" {
   description = "A unique identifier for all resources in this example"
   default     = "0a04bd6e"
 }
+
+variable "db_username" {
+  type        = string
+  description = "The username for the database"
+}
+
+variable "db_password" {
+  type        = string
+  description = "The password for the database"
+}
+
+variable "db_host" {
+  type        = string
+  description = "The hostname for the database"
+}
+
+variable "db_name" {
+  type        = string
+  description = "The name of the database"
+}

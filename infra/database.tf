@@ -3,8 +3,8 @@ resource "azurerm_mysql_flexible_server" "mysql_server" {
   location            = azurerm_resource_group.backend_rg.location
   resource_group_name = azurerm_resource_group.backend_rg.name
 
-  administrator_login    = "mysqladminun"
-  administrator_password = "HASh1CoR3!"
+  administrator_login    = var.db_username
+  administrator_password = var.db_password
 
   sku_name = "GP_Standard_D2ds_v4"
   version  = "8.0.21"

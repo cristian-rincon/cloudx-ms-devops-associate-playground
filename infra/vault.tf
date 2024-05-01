@@ -12,11 +12,15 @@ resource "azurerm_key_vault" "app_kv" {
     key_permissions = [
       "Get",
       "List",
+      "Create",
+      "Delete"
     ]
 
     secret_permissions = [
       "Get",
       "List",
+      "Set",
+      "Delete"
     ]
   }
 
@@ -27,4 +31,28 @@ resource "azurerm_key_vault" "app_kv" {
   depends_on = [
     azurerm_resource_group.frontend_rg
   ]
+}
+
+resource "azurerm_key_vault_secret" "db_username" {
+  name         = "db-username"
+  value        = var.db_username
+  key_vault_id = azurerm_key_vault.app_kv.id
+}
+
+resource "azurerm_key_vault_secret" "db_password" {
+  name         = "db-password"
+  value        = var.db_password
+  key_vault_id = azurerm_key_vault.app_kv.id
+}
+
+resource "azurerm_key_vault_secret" "db_host" {
+  name         = "db-host"
+  value        = var.db_host
+  key_vault_id = azurerm_key_vault.app_kv.id
+}
+
+resource "azurerm_key_vault_secret" "db_name" {
+  name         = "db-name"
+  value        = var.db_name
+  key_vault_id = azurerm_key_vault.app_kv.id
 }

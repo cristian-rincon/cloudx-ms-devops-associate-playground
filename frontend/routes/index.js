@@ -18,21 +18,21 @@ router.get("/", function (req, res) {
   axios
     .get(`${backendUrlBase}/thoughts`)
     .then(function (response) {
+      req.session.justPosted = false;
       const thoughts =
         response.data.length > 0
           ? response.data.map((thought) => thought.thought).reverse()
           : ["Hey, no thoughts stored yet!"];
       res.render("index", { thoughts: thoughts, title: appTitle,  justPosted: req.session.justPosted });
-      req.session.justPosted = false;
     })
     .catch(function (error) {
+      req.session.justPosted = false;
       console.log(error);
       res.render("index", {
         thoughts: ["Hey, no thoughts stored yet!"],
         title: appTitle,
         justPosted: req.session.justPosted,
       });
-      req.session.justPosted = false;
     });
 });
 

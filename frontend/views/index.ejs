@@ -30,27 +30,54 @@
   </head>
   <body>
     <div class="container mx-auto">
-      <h1><%= title %></h1>
-      <p>Welcome to <%= title %></p>
+      <div class="py-2">
+        <h1 class="text-2xl font-bold"><%= title %></h1>
+        <p>Welcome to <%= title %></p>
+      </div>
+        <div class="columns-1xs p-5 shadow-md rounded-md">
+          <div>
+            <h2 class="text-lg font-semibold">What is this?</h3>
+            <p class="text-slate-600">
+              This is a simple web application that allows you to share your
+              thoughts with the world.
+            </p>
+            <h2 class="text-lg font-semibold">How does it work?</h2>
+            <p class="text-slate-600">
+              Simply write your thought in the text area below and click the
+              submit button. Your thought will be stored in a database and
+              displayed on this page.
+            </p>
+          </div>
+        </div>
 
-      <h2>Share your thought</h2>
-
-      <form id="thought-form" action="/" method="post">
-        <textarea
-          id="content"
-          name="content"
-          placeholder="Write your thought here..."
-        ></textarea>
-        <button class="bg-sky-500 hover:bg-sky-700" type="submit">
-          Submit
-        </button>
-      </form>
-
-      <h2>Thoughts</h2>
-      <div id="thoughts">
-        <% thoughts.forEach(function(thought) { %>
-        <p><%= thought %></p>
-        <% }); %>
+      <h2 class="text-xl font-semibold py-2">Share your thought</h2>
+      <div class="columns-lg p-5 shadow-md rounded-md">
+        <div>
+          <form id="thought-form" action="/" method="post">
+            <label for="content" class="block font-semibold">Thought:</label>
+            <textarea
+              id="content"
+              name="content"
+              placeholder="Write your thought here..."
+              class="w-full p-2 rounded-md"
+            ></textarea>
+            <button type="submit" class="px-5 py-2 shadow-md rounded-md bg-cyan-400 hover:bg-cyan-300 font-semibold" >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <h2 class="text-xl font-semibold py-2">Thoughts</h2>
+      <div class="columns-xl p-5 shadow-md rounded-md">
+        <div>
+          <div id="thoughts">
+            <ul role="list" class="marker:text-sky-400 list-disc pl-5 space-y-3 text-slate-600">
+              <% thoughts.forEach(function(thought) { %>
+              <li><%= thought %></li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <script>

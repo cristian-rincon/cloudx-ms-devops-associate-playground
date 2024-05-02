@@ -2,10 +2,61 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="/stylesheets/style.css" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          container: {
+            center: true,
+          },
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="container mx-auto">
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+
+      <h2>Share your thought</h2>
+
+      <form id="thought-form" action="/" method="post">
+        <textarea
+          id="content"
+          name="content"
+          placeholder="Write your thought here..."
+        ></textarea>
+        <button class="bg-sky-500 hover:bg-sky-700" type="submit">
+          Submit
+        </button>
+      </form>
+
+      <h2>Thoughts</h2>
+      <div id="thoughts">
+        <% thoughts.forEach(function(thought) { %>
+        <p><%= thought %></p>
+        <% }); %>
+      </div>
+    </div>
+    <script>
+      <% if (justPosted) { %>
+          alert('Thought successfully stored!');
+      <% } %>
+    </script>
   </body>
 </html>
